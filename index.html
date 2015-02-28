@@ -1,0 +1,75 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var c = 'A';
+var specials = ['&nbsp;','.',',','!','?','-','_'];
+var s = 0;
+var rows = ['A','1','&nbsp;'];
+var row = 0;
+function inArray(arr,c){
+	var i;
+	for(i=0;i<arr.length;i++){
+		if(arr[i]==c)
+			return true;
+	}
+	return false;
+}
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode ==37){
+        if (c == 'A') {
+            c = 'Z';
+        }
+        else if (c == '0') {
+            c = '9';
+        }
+        else if (c == '&nbsp;'){
+        	c = '_';
+        	s = 6;
+        	
+        }else if(inArray( specials, c )){
+        	s--;
+        	c = specials[s];
+        }
+
+        else{
+            c = String.fromCharCode(c.charCodeAt() - 1);
+        }
+        
+    } else if(event.keyCode ==39){
+        if (c == 'Z') {
+            c = 'A';
+        }else if (c == '9') {
+            c = '0';
+        }
+        else if (c == '_'){
+        	c = '&nbsp;';
+        	s = 0;
+        }else if(inArray( specials, c )){
+        	s++;
+        	c = specials[s];
+        }
+
+        else{
+            c = String.fromCharCode(c.charCodeAt() + 1);
+        }
+    }
+
+    else if(event.keyCode ==40){
+        if(row==2) { row = 0 }
+        else {row++;}
+        c = rows[row];
+    }
+
+    else if(event.keyCode ==32){
+        var text = $('#result').html();
+        $('#result').html(text+c);
+
+    }
+
+    console.log(event.keyCode+" "+c);
+    $('#character').html(c);
+
+  
+});
+</script>
+<div id="character">A</div>
+<div id="result"></div>
