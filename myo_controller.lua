@@ -1,4 +1,4 @@
-scriptId = 'com.thalmic.examples.myotype'
+scriptId = 'com.hacklondon.myotype'
 scriptTitle = "MyoType"
 scriptDetailsUrl = "" -- We don't have this until it's submitted to the Myo Market
 
@@ -10,24 +10,24 @@ function onPoseEdge(pose, edge)
     if pose == 'waveIn' and edge =='on' then
     	left = true
         internal_clock = 0
-    	myo.keyboard("left_arrow", "down")
-    end
-
-    if pose == 'waveOut' and edge =='on'  then
+    	myo.keyboard("left_arrow", "press")
+    
+    elseif pose == 'waveOut' and edge =='on'  then
     	right = true
         internal_clock = 0
-    	myo.keyboard("right_arrow", "down")
-    end
+    	myo.keyboard("right_arrow", "press")
+    
 
-    if pose == 'fist' and edge =='on'  then
+    elseif pose == 'fist' and edge =='on'  then
     	myo.keyboard("down_arrow", "press")
-    end
-    if pose == 'doubleTap' and edge =='on'  then
+    
+    elseif pose == 'doubleTap' and edge =='on'  then
     	myo.keyboard("space", "press")
-    end
-    if pose == 'rest' and edge =='on'  then
+    
+    elseif pose == 'rest' and edge =='on'  then
     	left = false
     	right = false
+        internal_clock = 0
     	myo.keyboard("left_arrow", "up")
     	myo.keyboard("right_arrow", "up")
     end   
@@ -36,7 +36,7 @@ end
 function onPeriodic()
 	internal_clock = internal_clock + 10
 	myo.unlock()
-	if internal_clock == 200 then
+	if internal_clock == 250 then
 		internal_clock = 0
 		if right == true then
 			myo.keyboard("right_arrow", "press")

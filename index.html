@@ -293,7 +293,7 @@ text-align: center;
     <h1>MyoTyper</h1>
     <fieldset id="inputs">
         <div class="tip">Provide a letter using Myo</div>
-        <input id="username" type="text" maxlength="1" value="A" />   
+        <input id="username" type="text" maxlength="1" value="A " />   
     </fieldset>
     <fieldset id="inputs">
         <div class="tip">Your input</div>
@@ -372,7 +372,11 @@ document.addEventListener('keydown', function(event) {
         var text = $('#result').html();
         if (c=='<-'){
             console.debug("BACKSPACE");
-            text = text.substring(0,text.length-1);
+            var n = 1;
+            if(text.substring(text.length-1,text.length) == ';'   ){
+                n = 6;
+            }
+            text = text.substring(0,text.length-n);
             $('#result').html(text);
         	
         }
