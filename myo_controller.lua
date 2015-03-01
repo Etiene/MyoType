@@ -36,7 +36,7 @@ end
 function onPeriodic()
 	internal_clock = internal_clock + 10
 	myo.unlock()
-	if internal_clock == 300 then
+	if internal_clock == 200 then
 		internal_clock = 0
 		if right == true then
 			myo.keyboard("right_arrow", "press")
