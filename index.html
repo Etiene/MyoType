@@ -1,8 +1,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 var c = 'A';
-var actions = ['Select','Copy','Paste','DuckDuckGo'];
-var specials = ['<-','&nbsp;','.',',','!','?','-','_'];
+var specials = ['<-','&nbsp;','.',',','!','?','-','_','DuckDuckGo'];
 var s = 0;
 var rows = ['A','1','<-'];
 var row = 0;
@@ -41,7 +40,7 @@ document.addEventListener('keydown', function(event) {
         }else if (c == '9') {
             c = '0';
         }
-        else if (c == '_'){
+        else if (c == 'DuckDuckGo'){
         	c = '<-';
         	s = 0;
         }else if(inArray( specials, c )){
@@ -66,6 +65,11 @@ document.addEventListener('keydown', function(event) {
             console.debug("BACKSPACE");
             text = text.substring(0,text.length-1);
             $('#result').html(text);
+        	
+        }
+            else if( c== 'DuckDuckGo'){
+			
+window.location.replace("http://duckduckgo.com/?q=" + text);
          }else {
             $('#result').html(text+c);
          }
