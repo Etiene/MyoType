@@ -1,9 +1,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 var c = 'A';
-var specials = ['&nbsp;','.',',','!','?','-','_'];
+var specials = ['<-','&nbsp;','.',',','!','?','-','_'];
 var s = 0;
-var rows = ['A','1','&nbsp;'];
+var rows = ['A','1','<-'];
 var row = 0;
 function inArray(arr,c){
 	var i;
@@ -21,9 +21,9 @@ document.addEventListener('keydown', function(event) {
         else if (c == '0') {
             c = '9';
         }
-        else if (c == '&nbsp;'){
+        else if (c == '<-'){
         	c = '_';
-        	s = 6;
+        	s = 7;
         	
         }else if(inArray( specials, c )){
         	s--;
@@ -41,7 +41,7 @@ document.addEventListener('keydown', function(event) {
             c = '0';
         }
         else if (c == '_'){
-        	c = '&nbsp;';
+        	c = '<-';
         	s = 0;
         }else if(inArray( specials, c )){
         	s++;
@@ -61,7 +61,13 @@ document.addEventListener('keydown', function(event) {
 
     else if(event.keyCode ==32){
         var text = $('#result').html();
-        $('#result').html(text+c);
+        if (c=='<-'){
+            console.debug("BACKSPACE");
+            text = text.substring(0,text.length-1);
+            $('#result').html(text);
+         }else {
+            $('#result').html(text+c);
+         }
 
     }
 
