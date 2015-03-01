@@ -5,6 +5,8 @@ scriptDetailsUrl = "" -- We don't have this until it's submitted to the Myo Mark
 local right = false
 local left = false
 local  internal_clock = 0
+local scroll = false
+
 function onPoseEdge(pose, edge)
     myo.debug("onPoseEdge: " .. pose .. ", " .. edge)
     if pose == 'waveIn' and edge =='on' then
@@ -36,12 +38,23 @@ end
 function onPeriodic()
 	internal_clock = internal_clock + 10
 	myo.unlock()
-	if internal_clock == 250 then
-		internal_clock = 0
+    --myo.debug("what")
+    if left or right and internal_clock == 400 then 
+        scroll = true 
+        internal_clock = 0
+    end
+	if internal_clock == 100 and  scroll then
+		
+        
 		if right == true then
+            myo.debug("move"..internal_clock)
 			myo.keyboard("right_arrow", "press")
+            scroll = false
 		elseif left == true then
 			myo.keyboard("left_arrow", "press")
+            myo.debug("move"..internal_clock)
+            scroll = false
+            internal_clock = 0
 		end
 
 	end
@@ -58,7 +71,7 @@ function activeAppName()
 end
 
 function onActiveChange(isActive)
-	--myo.unlock()
+	myo.unlock()
     myo.debug("onActiveChange")
 end
 
