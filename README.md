@@ -1,6 +1,6 @@
 # MyoType
 Writing using myo as input, useful for people with disabilities. 
-Done during HackLondon
+Coded during HackLondon
 
 Live Demo: http://pma.etiene.net/hacklondon/
 (You need a Myo https://www.thalmic.com/en/myo/)
